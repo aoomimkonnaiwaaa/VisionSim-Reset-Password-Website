@@ -1,450 +1,274 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
   <title>VisionSim | Reset Password</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Kanit', sans-serif;
-      background: #eef3fb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Main layout */
-    .container {
-      width: 95%;
-      max-width: 1400px;
-      min-height: 760px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: white;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Left panel */
-    .left-panel {
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .illustration {
-      width: 85%;
-      max-width: 480px;
-      margin-bottom: 45px;
-    }
-
-    .left-panel h2 {
-      color: #0759e9;
-      font-size: 28px;
-      margin: 0 0 10px;
-    }
-
-    .left-panel p {
-      color: #0759e9;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 0;
-    }
-
-    /* Right panel */
-    .right-panel {
-      background: #0759e9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 60px;
-    }
-
-    .form-container {
-      width: 100%;
-      max-width: 520px;
-    }
-
-    h1 {
-      color: white;
-      font-size: 54px;
-      font-weight: 800;
-      margin: 0 0 18px;
-    }
-
-    .subtitle {
-      color: #e4efff;
-      font-size: 18px;
-      margin-bottom: 42px;
-      line-height: 1.5;
-    }
-
-    /* Capsule input */
-    .input-group {
-      margin-bottom: 28px;
-    }
-
-    .input-group label {
-      color: white;
-      display: block;
-      font-weight: bold;
-      margin-bottom: 12px;
-      font-size: 16px;
-    }
-
-    .input-wrapper {
-      position: relative;
-    }
-
-    .input-wrapper input {
-      width: 100%;
-      height: 72px;
-      border-radius: 50px;
-      border: 2px solid transparent;
-      background: white;
-      padding: 0 85px 0 30px;
-      font-size: 18px;
-      color: #153b70;
-      outline: none;
-    }
-
-    .input-wrapper input:focus {
-      border-color: #ffa51d;
-    }
-
-
-    .show-btn {
-    position: absolute;
-    right: 26px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 32px;
-    height: 32px;
-
-    border: none;
-    background: transparent;
-    color: #0759e9;
-    cursor: pointer;
-    }
-
-    .show-btn svg {
-    width: 26px;
-    height: 26px;
-    stroke-width: 2.5;
-    }
-
-
-    /* Password requirements */
-    .requirements {
-      color: #e3efff;
-      font-size: 14px;
-      margin-bottom: 30px;
-      line-height: 1.8;
-    }
-
-    .requirements span {
-      display: block;
-    }
-
-    .requirements .valid {
-      color: #a9ffcb;
-    }
-
-    /* Button */
-    .reset-btn {
-      width: 100%;
-      height: 72px;
-      background: linear-gradient(
-        90deg,
-        #ffb51e,
-        #ff6b00
-      );
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-size: 23px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .reset-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .back-link {
-      display: block;
-      color: white;
-      text-align: center;
-      margin-top: 30px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    #message {
-      color: white;
-      text-align: center;
-      min-height: 24px;
-      margin-top: 18px;
-      font-size: 14px;
-    }
-
-    /* Responsive layout */
-    @media (max-width: 768px) {
-      body {
-        background: #0759e9;
-      }
-
-      .container {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .left-panel {
-        padding: 25px;
-      }
-
-      .illustration {
-        width: 160px;
-        margin-bottom: 10px;
-      }
-
-      .left-panel h2 {
-        font-size: 18px;
-      }
-
-      .left-panel p {
-        font-size: 13px;
-      }
-
-      .right-panel {
-        flex: 1;
-        padding: 40px 25px;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      .input-wrapper input {
-        height: 60px;
-      }
-
-      .reset-btn {
-        height: 60px;
-      }
-    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; font-family: 'Kanit', sans-serif; background: #eef3fb; display: flex; align-items: center; justify-content: center; }
+    .container { width: 95%; max-width: 1400px; min-height: 760px; display: grid; grid-template-columns: 1fr 1fr; background: white; box-shadow: 0 10px 40px rgba(0,0,0,.1); }
+    .left-panel { background: white; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center; }
+    .illustration { width: 85%; max-width: 480px; margin-bottom: 45px; }
+    .left-panel h2 { color: #0759e9; font-size: 28px; margin: 0 0 10px; }
+    .left-panel p { color: #0759e9; font-size: 20px; font-weight: bold; margin: 0; }
+    .right-panel { background: #0759e9; display: flex; justify-content: center; align-items: center; padding: 60px; }
+    .form-container { width: 100%; max-width: 520px; }
+    h1 { color: white; font-size: 54px; font-weight: 800; margin: 0 0 18px; line-height: 1.15; }
+    .subtitle { color: #e4efff; font-size: 18px; margin-bottom: 42px; line-height: 1.5; }
+    .input-group { margin-bottom: 28px; }
+    .input-group label { color: white; display: block; font-weight: bold; margin-bottom: 12px; font-size: 16px; }
+    .input-wrapper { position: relative; }
+    .input-wrapper input { width: 100%; height: 72px; border-radius: 50px; border: 2px solid transparent; background: white; padding: 0 85px 0 30px; font: 18px 'Kanit', sans-serif; color: #153b70; outline: none; }
+    .input-wrapper input:focus { border-color: #ffa51d; }
+    .input-wrapper input:disabled { opacity: .7; }
+    .show-btn { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: none; background: transparent; color: #0759e9; cursor: pointer; }
+    .show-btn svg { width: 26px; height: 26px; stroke-width: 2.5; }
+    .requirements { color: #e3efff; font-size: 14px; margin-bottom: 30px; line-height: 1.8; }
+    .requirements span { display: block; }
+    .requirements .valid { color: #a9ffcb; }
+    .reset-btn { width: 100%; min-height: 72px; background: linear-gradient(90deg,#ffb51e,#ff6b00); border: none; border-radius: 50px; color: white; font: bold 23px 'Kanit',sans-serif; cursor: pointer; transition: transform .2s; }
+    .reset-btn:hover:not(:disabled) { transform: translateY(-2px); }
+    .reset-btn:disabled { opacity: .55; cursor: not-allowed; }
+    #message { color: white; text-align: center; min-height: 24px; margin-top: 18px; font-size: 15px; line-height: 1.5; }
+    @media (max-width: 768px) { body { background: #0759e9; } .container { width: 100%; min-height: 100vh; display: flex; flex-direction: column; } .left-panel { padding: 25px; } .illustration { width: 160px; margin-bottom: 10px; } .left-panel h2 { font-size: 18px; } .left-panel p { font-size: 13px; } .right-panel { flex: 1; padding: 40px 25px; } h1 { font-size: 36px; } .input-wrapper input { height: 60px; } .reset-btn { min-height: 60px; } }
   </style>
 </head>
-
 <body>
   <main class="container">
-
-    <!-- Left side -->
     <section class="left-panel">
-
-      <!-- Replace with your Illustrator illustration -->
-      <img
-        src="./images/computer_vision_logo.png"
-        alt="Computer Vision Illustration"
-        class="illustration"
-      />
-
+      <img src="./images/computer_vision_logo.png" alt="Computer Vision Illustration" class="illustration" onerror="this.style.display='none'" />
       <h2>FOCUS | CAPTURE | DISCOVER</h2>
       <p>An interactive journey into computer vision.</p>
-
     </section>
-
-    <!-- Right side -->
     <section class="right-panel">
-
       <form class="form-container" id="resetForm">
-
         <h1>RESET PASSWORD</h1>
-
-        <p class="subtitle">
-          Create a new password to secure your account.
-        </p>
-
-        <!-- New Password -->
+        <p class="subtitle">Create a new password to secure your account.</p>
         <div class="input-group">
           <label for="password">New Password</label>
-
           <div class="input-wrapper">
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter new password"
-              autocomplete="new-password"
-              required
-            />
-
-
-            <button
-                type="button"
-                class="show-btn"
-                onclick="togglePassword('password', this)"
-                aria-label="Show password"
-                >
-                <i data-lucide="eye"></i>
-            </button>
-
+            <input type="password" id="password" placeholder="Enter new password" autocomplete="new-password" required disabled />
+            <button type="button" class="show-btn" data-target="password" aria-label="Show password"><i data-lucide="eye"></i></button>
           </div>
         </div>
-
-        <!-- Confirm Password -->
         <div class="input-group">
-          <label for="confirmPassword">
-            Confirm New Password
-          </label>
-
+          <label for="confirmPassword">Confirm New Password</label>
           <div class="input-wrapper">
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm new password"
-              autocomplete="new-password"
-              required
-            />
-
-
-        <button
-        type="button"
-        class="show-btn"
-        onclick="togglePassword('confirmPassword', this)"
-        aria-label="Show password"
-        >
-        <i data-lucide="eye"></i>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password" autocomplete="new-password" required disabled />
+            <button type="button" class="show-btn" data-target="confirmPassword" aria-label="Show password"><i data-lucide="eye"></i></button>
           </div>
         </div>
-
-        <!-- Validation -->
         <div class="requirements">
-          <span id="matchCheck">
-            ○ Both passwords match
-          </span>
+          <span id="lengthCheck">○ At least 8 characters</span>
+          <span id="numberCheck">○ Contains a letter and a number</span>
+          <span id="matchCheck">○ Both passwords match</span>
         </div>
-
-        <button type="submit" class="reset-btn">
-          Reset Password
-        </button>
-
-        <div id="message" role="status" aria-live="polite"></div>
-
-
+        <button type="submit" class="reset-btn" id="resetButton" disabled>Reset Password</button>
+        <div id="message" role="status" aria-live="polite">Verifying your password reset link...</div>
       </form>
     </section>
-
   </main>
-
   <script>
-    const form = document.getElementById("resetForm");
-    const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
-    const message = document.getElementById("message");
+    // Supabase loads before DOMContentLoaded because its script uses defer.
+    window.addEventListener('DOMContentLoaded', () => {
+      const SUPABASE_URL = 'https://khhtfopdttntxqbhavcc.supabase.co';
+      // Only the public publishable key belongs in browser-side code.
+      const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_ECza3BW9WDD-d9RCufZOoA_bB6VZhO-';
 
+      const form = document.getElementById('resetForm');
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirmPassword');
+      const submit = document.getElementById('resetButton');
+      const message = document.getElementById('message');
+      let client = null;
+      let recoveryReady = false;
+      let submitting = false;
+      let complete = false;
 
-function togglePassword(inputId, button) {
-  const input = document.getElementById(inputId);
-  const isHidden = input.type === "password";
-
-  input.type = isHidden ? "text" : "password";
-
-  button.setAttribute(
-    "aria-label",
-    isHidden ? "Hide password" : "Show password"
-  );
-
-  button.innerHTML = isHidden
-    ? '<i data-lucide="eye-off"></i>'
-    : '<i data-lucide="eye"></i>';
-
-  lucide.createIcons();
-}
-
-// Initialize icons when the page loads
-lucide.createIcons();
-
-
-    function validatePassword() {
-      const pass = password.value;
-      const confirm = confirmPassword.value;
-
-      const lengthValid = pass.length >= 8;
-      const numberValid =
-        /[A-Za-z]/.test(pass) && /\d/.test(pass);
-      const matchValid =
-        confirm.length > 0 && pass === confirm;
-
-      updateCheck(
-        "lengthCheck",
-        lengthValid,
-        "At least 8 characters"
-      );
-
-      updateCheck(
-        "numberCheck",
-        numberValid,
-        "Contains a letter and a number"
-      );
-
-      updateCheck(
-        "matchCheck",
-        matchValid,
-        "Both passwords match"
-      );
-
-      return lengthValid && numberValid && matchValid;
-    }
-
-    function updateCheck(id, valid, text) {
-      const element = document.getElementById(id);
-      element.textContent = (valid ? "✓ " : "○ ") + text;
-      element.classList.toggle("valid", valid);
-    }
-
-    password.addEventListener("input", validatePassword);
-    confirmPassword.addEventListener("input", validatePassword);
-
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      if (!validatePassword()) {
-        message.textContent =
-          "Please meet all password requirements.";
-        message.style.color = "#ffe1e1";
-        return;
+      function setMessage(text, good = false) {
+        message.textContent = text;
+        message.style.color = good ? '#a9ffcb' : '#ffe1e1';
       }
 
-      // Front-end demo only.
-      // Connect your authentication backend here.
-      message.textContent =
-        "Password validated! Connect your backend to complete the reset.";
-      message.style.color = "#a9ffcb";
+      function fail(text) {
+        recoveryReady = false;
+        password.disabled = true;
+        confirmPassword.disabled = true;
+        submit.disabled = true;
+        submit.textContent = 'Reset Password';
+        setMessage(text);
+      }
+
+      function refreshIcons() {
+        if (window.lucide) window.lucide.createIcons();
+      }
+      refreshIcons();
+      document.querySelectorAll('.show-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const field = document.getElementById(btn.dataset.target);
+          const visible = field.type === 'password';
+          field.type = visible ? 'text' : 'password';
+          btn.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+          btn.innerHTML = `<i data-lucide="${visible ? 'eye-off' : 'eye'}"></i>`;
+          refreshIcons();
+        });
+      });
+
+      function updateCheck(id, valid, label) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = (valid ? '✓ ' : '○ ') + label;
+        el.classList.toggle('valid', valid);
+      }
+
+      function validatePassword() {
+        const p = password.value;
+        const c = confirmPassword.value;
+        const lengthValid = p.length >= 8;
+        const letterNumberValid = /[A-Za-z]/.test(p) && /\d/.test(p);
+        const matchValid = c.length > 0 && p === c;
+        updateCheck('lengthCheck', lengthValid, 'At least 8 characters');
+        updateCheck('numberCheck', letterNumberValid, 'Contains a letter and a number');
+        updateCheck('matchCheck', matchValid, 'Both passwords match');
+        return lengthValid && letterNumberValid && matchValid;
+      }
+      password.addEventListener('input', validatePassword);
+      confirmPassword.addEventListener('input', validatePassword);
+
+      async function withTimeout(promise, label, duration = 20000) {
+        let timer;
+        try {
+          return await Promise.race([
+            promise,
+            new Promise((_, reject) => {
+              timer = setTimeout(() => reject(new Error(label + ' timed out. Check your internet connection.')), duration);
+            })
+          ]);
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+
+      async function initializeRecovery() {
+        submit.disabled = true;
+        password.disabled = true;
+        confirmPassword.disabled = true;
+        setMessage('Checking password reset link...');
+
+        if (!window.supabase?.createClient) {
+          fail('Supabase library could not load. Refresh this page and check your connection.');
+          return;
+        }
+        if (!SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_')) {
+          fail('Supabase publishable key is not configured.');
+          return;
+        }
+
+        const query = new URLSearchParams(window.location.search);
+        const fragment = new URLSearchParams(window.location.hash.slice(1));
+        const tokenHash = query.get('token_hash');
+        const type = query.get('type');
+
+        if (query.has('error') || fragment.has('error')) {
+          fail('Supabase rejected the recovery link. Please request a new reset email.');
+          return;
+        }
+        if (!tokenHash || type !== 'recovery') {
+          fail('No valid recovery token found. Request a NEW reset email after updating the Supabase Reset Password email template.');
+          return;
+        }
+
+        client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+          auth: {
+            detectSessionInUrl: false,
+            persistSession: false,
+            autoRefreshToken: false
+          }
+        });
+
+        try {
+          // The email supplies ?token_hash=...&type=recovery.
+          // verifyOtp exchanges it for a recovery session; the student does not see a second step.
+          const { data, error } = await withTimeout(
+            client.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' }),
+            'Recovery link verification'
+          );
+          if (error) throw error;
+          if (!data?.session?.access_token) {
+            throw new Error('Supabase did not return a recovery session.');
+          }
+
+          // Immediately remove the one-time token from browser history/address bar.
+          window.history.replaceState({}, document.title, window.location.pathname);
+          recoveryReady = true;
+          password.disabled = false;
+          confirmPassword.disabled = false;
+          submit.disabled = false;
+          setMessage('Recovery link verified. Please enter your new password.', true);
+        } catch (error) {
+          console.error('Recovery verification failed:', error);
+          window.history.replaceState({}, document.title, window.location.pathname);
+          fail('Reset link invalid, expired, or already used. Please request a new reset email.');
+        }
+      }
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (!recoveryReady || submitting || complete) return;
+        if (!validatePassword()) {
+          setMessage('Please meet all password requirements.');
+          return;
+        }
+
+        submitting = true;
+        submit.disabled = true;
+        submit.textContent = 'Updating...';
+        setMessage('Updating your password...');
+        try {
+          const { error } = await withTimeout(
+            client.auth.updateUser({ password: password.value }), 'Password update'
+          );
+          if (error) throw error;
+
+          complete = true;
+          recoveryReady = false;
+          password.value = '';
+          confirmPassword.value = '';
+          password.disabled = true;
+          confirmPassword.disabled = true;
+          submit.textContent = 'Password Updated';
+          setMessage('Password updated successfully! Return to VisionSim and log in with the new password.', true);
+
+          // Sign out of this browser recovery session without changing the successful result.
+          try {
+            const { error: signOutError } = await client.auth.signOut({ scope: 'local' });
+            if (signOutError) console.warn('Recovery session sign-out:', signOutError.message);
+          } catch (signOutError) {
+            console.warn('Recovery session sign-out:', signOutError);
+          }
+        } catch (error) {
+          console.error('Password update failed:', error);
+          setMessage(error?.message || 'Unable to update password. Please try again.');
+        } finally {
+          submitting = false;
+          if (!complete) {
+            submit.disabled = false;
+            submit.textContent = 'Reset Password';
+          }
+        }
+      });
+
+      initializeRecovery().catch(error => {
+        console.error('Unexpected reset-page error:', error);
+        fail('Could not initialize password reset. Please refresh the page.');
+      });
     });
   </script>
 </body>
